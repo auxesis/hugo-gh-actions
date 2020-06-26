@@ -11,14 +11,16 @@ jobs:
     name: Build the website
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - name: 🛒 Checkout repo
+      uses: actions/checkout@v2
       with:
         repository: section-io/section-io.github.io
         token: ${{ secrets.ACCESS_TOKEN }}
         submodules: true
-    - name: Build the Docker image
+    - name: 🛠 Build the Docker image
       run: make all
-    - uses: actions/upload-artifact@v2
+    - name: ⬆️ Upload the artifact
+      uses: actions/upload-artifact@v2
       with:
         name: website
         path: public/
@@ -28,7 +30,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-    - name: Screenshot Website
+    - name: 📸 Screenshot Website
       uses: swinton/screenshot-website@v1.0.0
       with:
         source: https://www.section.io/
