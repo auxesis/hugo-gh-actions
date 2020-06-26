@@ -14,25 +14,31 @@ jobs:
     - name: 🛒 Checkout repo
       uses: actions/checkout@v2
       with:
-        repository: section-io/section-io.github.io
+        repository: ${{ secrets.WEBSITE_REPO }}
         token: ${{ secrets.ACCESS_TOKEN }}
         submodules: true
-    - name: 🛠 Build the Docker image
-      run: make all
-    - name: ⬆️ Upload the artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: website
-        path: public/
+#    - name: 🛠 Build the Docker image
+#      run: hugo server
+#    - name: ⬆️ Upload the artifact
+#      uses: actions/upload-artifact@v2
+#      with:
+#        name: website
+#        path: public/
 
   screenshot:
     name: Screenshot the website
     needs: build
     runs-on: ubuntu-latest
+    services:
+      nginx:
+        image: nginx
+        # Map port 8080 on the Docker host to port 80 on the nginx container
+        ports:
+          - 8080:80
     steps:
     - name: 📸 Screenshot Website
       uses: swinton/screenshot-website@v1.0.0
       with:
-        source: https://www.section.io/
+        source: http://localhost/
         destination: screenshot.png
         full-page: true
