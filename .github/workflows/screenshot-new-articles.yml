@@ -17,6 +17,11 @@ jobs:
         repository: ${{ secrets.WEBSITE_REPO }}
         token: ${{ secrets.ACCESS_TOKEN }}
         submodules: true
+    - name: Build, Tag, Push
+      uses: mattdavis0351/actions/docker-gpr@v1
+      with:
+        repo-token: ${{ secrets.ACCESS_TOKEN }}
+        image-name: section-gh-action-www.section.io
 #    - name: 🛠 Build the Docker image
 #      run: hugo server
 #    - name: ⬆️ Upload the artifact
