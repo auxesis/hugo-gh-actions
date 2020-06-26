@@ -18,8 +18,6 @@ jobs:
         ref: add-entrypoint-to-dockerfile
         token: ${{ secrets.ACCESS_TOKEN }}
         submodules: true
-    - name: Cache the image
-      run: docker pull auxesis/section-gh-action-www.section.io
     - name: Build, Tag, Push
       uses: docker/build-push-action@v1
       with:
