@@ -18,3 +18,15 @@ jobs:
         submodules: true
     - name: Build the Docker image
       run: make all
+
+  screenshot:
+    name: Screenshot the website
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Screenshot Website
+      uses: swinton/screenshot-website@v1.0.0
+      with:
+        source: https://www.section.io/
+        destination: screenshot.png
+        full-page: true
