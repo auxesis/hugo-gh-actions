@@ -42,7 +42,7 @@ jobs:
       uses: actions/github-script@0.6.0
       id: pr
       with:
-        github-token: ${{env.BOT_USER_TOKEN}}
+        github-token: ${{env.GITHUB_TOKEN}}
         result-encoding: string
         script: |
           const result = await github.repos.listPullRequestsAssociatedWithCommit({
@@ -54,7 +54,7 @@ jobs:
     - id: file_changes
       uses: trilom/file-changes-action@v1.2.3
       with:
-        githubToken: ${{ env.BOT_USER_TOKEN }}
+        githubToken: ${{ env.GITHUB_TOKEN }}
         prNumber: ${{ steps.pr.outputs.results }}
         output: ' '
         fileOutput: ' '
