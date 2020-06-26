@@ -14,6 +14,9 @@ images:
   - url: /engineering-education/abstraction-concepts-part2/hero.jpg
     alt: python ball face
 ---
+
+Some new text.
+
 Like C++, Java, Smalltalk, and many others, Python is an object-oriented language. Python, however, is multi-paradigmatic, meaning that you can choose the paradigm best suited for the task, but its central paradigm is object-oriented programming.
 <!--more-->
 
