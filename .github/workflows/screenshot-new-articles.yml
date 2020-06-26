@@ -31,14 +31,8 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     services:
-      nginx:
-        image: nginx
-        # Map port 8080 on the Docker host to port 80 on the nginx container
-        ports:
-          - 8080:80
       website:
         image: registry.hub.docker.com/auxesis/section-gh-action-www.section.io:latest
-        #options: --entrypoint 'hugo server'
         ports:
           - 1313:1313
     steps:
