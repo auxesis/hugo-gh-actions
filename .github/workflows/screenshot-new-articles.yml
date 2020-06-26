@@ -18,6 +18,10 @@ jobs:
         submodules: true
     - name: Build the Docker image
       run: make all
+    - uses: actions/upload-artifact@v2
+      with:
+        name: website
+        path: public/
 
   screenshot:
     name: Screenshot the website
