@@ -38,9 +38,16 @@ jobs:
         ports:
           - 1313:1313
     steps:
-    - name: 📸 Screenshot Website
-      uses: swinton/screenshot-website@v1.0.0
-      with:
-        source: http://localhost:1313/
-        destination: screenshot.png
-        full-page: true
+    - name: test curl
+      continue-on-error: true
+      run: curl -v http://website:1313/
+    - name: test curl
+      continue-on-error: true
+      run: curl -v http://localhost:1313/
+
+#    - name: 📸 Screenshot Website
+#      uses: swinton/screenshot-website@v1.0.0
+#      with:
+#        source: http://localhost:1313/
+#        destination: screenshot.png
+#        full-page: true
