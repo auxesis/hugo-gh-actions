@@ -38,7 +38,10 @@ jobs:
     steps:
     - name: 🛒 Checkout repo
       uses: actions/checkout@v2
-    - run: echo ${{ github.event.pull_request.number }}
+    - name: Dump github.event
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github.event) }}
+      run: echo "$GITHUB_CONTEXT"
     - name: Identify file changes
       id: file_changes
       uses: trilom/file-changes-action@v1.2.3
