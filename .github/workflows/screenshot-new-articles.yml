@@ -24,13 +24,6 @@ jobs:
 #        password: ${{ secrets.DOCKER_PASSWORD }}
 #        repository: auxesis/section-gh-action-www.section.io
 #        tags: latest
-#    - name: 🛠 Build the Docker image
-#      run: hugo server
-#    - name: ⬆️ Upload the artifact
-#      uses: actions/upload-artifact@v2
-#      with:
-#        name: website
-#        path: public/
 
   screenshot:
     name: Screenshot the website
