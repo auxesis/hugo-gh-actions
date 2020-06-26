@@ -40,6 +40,10 @@ jobs:
         # Map port 8080 on the Docker host to port 80 on the nginx container
         ports:
           - 8080:80
+      website:
+        image: section-gh-action-www.section.io
+        ports:
+          - 1313:1313
     steps:
     - name: 📸 Screenshot Website
       uses: swinton/screenshot-website@v1.0.0
