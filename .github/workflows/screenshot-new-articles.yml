@@ -36,6 +36,32 @@ jobs:
         ports:
           - 1313:1313
     steps:
+    - name: 🛒 Checkout repo
+      uses: actions/checkout@v2
+    - name: 🔎 Get PR details
+      uses: actions/github-script@0.6.0
+        id: pr
+        with:
+          github-token: ${{env.BOT_USER_TOKEN}}
+          result-encoding: string
+          script: |
+            const result = await github.repos.listPullRequestsAssociatedWithCommit({
+              owner: context.payload.repository.owner.name,
+              repo: context.payload.repository.name,
+              commit_sha: context.payload.head_commit.id
+            })
+            return result.data[0].number;
+    - id: file_changes
+      uses: trilom/file-changes-action@v1.2.3
+      with:
+        githubToken: ${{ env.BOT_USER_TOKEN }}
+        prNumber: ${{ steps.pr.outputs.results }}
+        output: ' '
+        fileOutput: ' '
+    - uses: actions/upload-artifact@v2
+      with:
+        name: file-changes
+        path: '~/*.json'
     - name: 📸 Screenshot Website
       uses: swinton/screenshot-website@v1.0.0
       with:
