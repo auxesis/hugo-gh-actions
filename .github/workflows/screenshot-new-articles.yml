@@ -17,13 +17,13 @@ jobs:
         repository: ${{ secrets.WEBSITE_REPO }}
         token: ${{ secrets.ACCESS_TOKEN }}
         submodules: true
-    - name: Build, Tag, Push
-      uses: docker/build-push-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: auxesis/section-gh-action-www.section.io
-        tags: latest
+#    - name: Build, Tag, Push
+#      uses: docker/build-push-action@v1
+#      with:
+#        username: ${{ secrets.DOCKER_USERNAME }}
+#        password: ${{ secrets.DOCKER_PASSWORD }}
+#        repository: auxesis/section-gh-action-www.section.io
+#        tags: latest
 #    - name: 🛠 Build the Docker image
 #      run: hugo server
 #    - name: ⬆️ Upload the artifact
