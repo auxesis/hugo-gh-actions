@@ -43,7 +43,7 @@ jobs:
         ports:
           - 8080:80
       website:
-        image: docker.pkg.github.com/auxesis/hugo-gh-actions/section-gh-action-www.section.io
+        image: auxesis/section-gh-action-www.section.io:latest
         options: --entrypoint 'hugo server'
         ports:
           - 1313:1313
