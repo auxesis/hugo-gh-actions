@@ -7,28 +7,28 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-    name: 🕸 Build the website
-    runs-on: ubuntu-latest
-    steps:
-    - name: 🛒 Checkout repo
-      uses: actions/checkout@v2
-      with:
-        repository: ${{ secrets.WEBSITE_REPO }}
-        ref: add-entrypoint-to-dockerfile
-        token: ${{ secrets.ACCESS_TOKEN }}
-        submodules: true
-    - name: 🛠 Build, Tag, Push
-      uses: docker/build-push-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: auxesis/section-gh-action-www.section.io
-        tags: latest
+#  build:
+#    name: 🕸 Build the website
+#    runs-on: ubuntu-latest
+#    steps:
+#    - name: 🛒 Checkout repo
+#      uses: actions/checkout@v2
+#      with:
+#        repository: ${{ secrets.WEBSITE_REPO }}
+#        ref: add-entrypoint-to-dockerfile
+#        token: ${{ secrets.ACCESS_TOKEN }}
+#        submodules: true
+#    - name: 🛠 Build, Tag, Push
+#      uses: docker/build-push-action@v1
+#      with:
+#        username: ${{ secrets.DOCKER_USERNAME }}
+#        password: ${{ secrets.DOCKER_PASSWORD }}
+#        repository: auxesis/section-gh-action-www.section.io
+#        tags: latest
 
   screenshot:
     name: 📸 Screenshot the website
-    needs: build
+    #needs: build
     runs-on: ubuntu-latest
     services:
       website:
