@@ -38,7 +38,9 @@ jobs:
     steps:
     - name: 🛒 Checkout repo
       uses: actions/checkout@v2
-    - id: file_changes
+    - run: echo ${{ github.event.pull_request.number }}
+    - name: Identify file changes
+      id: file_changes
       uses: trilom/file-changes-action@v1.2.3
       with:
         githubToken: ${{ secrets.GITHUB_TOKEN }}
