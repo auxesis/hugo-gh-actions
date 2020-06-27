@@ -30,8 +30,6 @@ jobs:
         name: file-changes
         path: ~/*.json
 
-    - run: jq --version
-    - run: cat ~/files_added.json ~/files_modified.json
     - name: 🚧 Stop execution if no article changes
       run: jq --exit-status --slurp '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | length > 0' ~/files_added.json ~/files_modified.json
 
@@ -47,6 +45,7 @@ jobs:
         ref: add-entrypoint-to-dockerfile
         token: ${{ secrets.ACCESS_TOKEN }}
         submodules: true
+    - run: 🔀 Change to
     - name: 🛠  Build, Tag, Push
       uses: docker/build-push-action@v1
       with:
