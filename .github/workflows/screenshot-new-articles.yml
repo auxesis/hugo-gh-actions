@@ -36,8 +36,10 @@ jobs:
         jq --slurp '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | length > 0' ~/files_added.json ~/files_modified.json > ~/any_articles.txt
         echo "##[set-output name=any_articles;]$(cat ~/any_articles.txt)"
 
+    - run: echo ${{ steps.any_articles.outputs.any_articles }}
+
     - name: 🚧 Stop if no article changes
-      if: steps.any_articles.outputs.any_articles
+      if: steps.any_articles.outputs.any_articles == "false"
       uses: andymckay/cancel-action@0.2
 
   build:
