@@ -26,10 +26,13 @@ jobs:
         prNumber: ${{ github.event.pull_request.number }}
         output: ' '
         fileOutput: ' '
-    - uses: actions/upload-artifact@v2
+
+    - name: ⬆️  Upload file changes
+      uses: actions/upload-artifact@v2
       with:
         name: file-changes
-        path: '~/*.json'
+        path: ~/*.json
+
     - name: 🚧 Stop execution
       run: exit 1
 
