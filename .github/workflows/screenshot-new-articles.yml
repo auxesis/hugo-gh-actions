@@ -22,10 +22,7 @@ jobs:
       id: file_changes
       uses: trilom/file-changes-action@v1.2.3
       with:
-        githubToken: ${{ secrets.GITHUB_TOKEN }}
         prNumber: ${{ github.event.pull_request.number }}
-        output: ' '
-        fileOutput: ' '
 
     - name: ⬆️  Upload file changes
       uses: actions/upload-artifact@v2
