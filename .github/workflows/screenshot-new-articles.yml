@@ -46,7 +46,7 @@ jobs:
         token: ${{ secrets.ACCESS_TOKEN }}
         submodules: true
     - name: 🔀 Change to PR branch
-      run: cd content/engineering-education && git checkout ${{ github.head_ref }}
+      run: cd content/engineering-education && ls && git status && git fetch && git checkout ${{ github.head_ref }}
     - name: 🛠 Build, Tag, Push
       uses: docker/build-push-action@v1
       with:
