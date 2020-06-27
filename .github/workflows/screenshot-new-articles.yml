@@ -67,6 +67,7 @@ jobs:
     steps:
     - name: 📸 Screenshot Website
       uses: swinton/screenshot-website@v1.0.0
+      timeout-minutes: 2
       with:
         source: http://localhost:1313/
         destination: screenshot.png
