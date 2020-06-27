@@ -36,7 +36,7 @@ jobs:
   bail:
     name: ✅ No screenshot needed
     needs: [ preflight ]
-    if: failure()
+    if: needs.preflight.result == 'failure'
     runs-on: ubuntu-latest
     steps:
     - name: 👍 No screenshot needed
