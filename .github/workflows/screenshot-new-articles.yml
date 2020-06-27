@@ -58,7 +58,8 @@ jobs:
         token: ${{ secrets.ACCESS_TOKEN }}
         submodules: true
     - name: 🔀 Change PR origin
-      run: cd content/engineering-education && git remote set-url origin https://github.com/${{ github.repository }}
+      working-directory: content/engineering-education
+      run: git remote set-url origin https://github.com/${{ github.repository }}
     - run: cd content/engineering-education && git remote show origin
     - name: 🔀 Fetch PR origin branches
       run: cd content/engineering-education && git fetch origin -f
