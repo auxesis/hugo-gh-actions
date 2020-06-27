@@ -60,7 +60,7 @@ jobs:
 
     - name: 🔀 Change to PR branch
       run: |
-        git config -l .gitmodules
+        git config -f .gitmodules --list
         git config -f .gitmodules submodule.eng-ed.url https://github.com/${{ github.repository }}
         git config -f .gitmodules submodule.eng-ed.branch $${ github.head_ref }}
         git submodule sync
