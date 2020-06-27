@@ -1,10 +1,11 @@
 name: Screenshot PR changes
 
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  issue_comment:
+    types: [ created ]
+#  pull_request:
+#    types: [ opened, synchronize, reopened ]
+#    branches: [ master ]
 
 jobs:
   preflight:
