@@ -33,13 +33,13 @@ jobs:
     - name: 🕵️ Any articles?
       id: any_articles
       run: |
-        echo -n "##[set-output name=any_articles;]"
-        jq --slurp '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | length > 0' ~/files_added.json ~/files_modified.json
+        echo -n "##[set-output name=count;]"
+        jq --slurp '.[0] + .[1] | unique | map(select(. | test("^articles\/")))' ~/files_added.json ~/files_modified.json
 
-    - run: echo ${{ steps.any_articles.outputs.any_articles }}
+    - run: echo ${{ steps.any_articles.outputs.count }}
 
     - name: 🚧 Stop if no article changes
-      if: steps.any_articles.outputs.any_articles == "false"
+      if: steps.any_articles.outputs.count == 0
       uses: andymckay/cancel-action@0.2
 
   build:
