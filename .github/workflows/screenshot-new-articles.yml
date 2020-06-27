@@ -29,6 +29,7 @@ jobs:
       with:
         name: file-changes
         path: ~/*.json
+    - run: ls ~/
 
     - name: 🚧 Stop execution
       run: exit 1
