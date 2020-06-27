@@ -34,7 +34,7 @@ jobs:
     - run: cat ~/files_added.json ~/files_modified.json
     - name: 🚧 Stop execution if no article changes
       #run: cat ~/files_added.json ~/files_modified.json | jq --exit-status -s '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | length > 0'
-      run: cat ~/files_added.json ~/files_modified.json | jq --slurp '.'
+      run: cat ~/files_added.json ~/files_modified.json | jq --slurp '. | flatten'
 
   build:
     name: 🕸 Build the website
