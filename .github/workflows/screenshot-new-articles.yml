@@ -34,7 +34,7 @@ jobs:
       id: any_articles
       run: |
         echo -n "##[set-output name=count;]"
-        jq --slurp '.[0] + .[1] | unique | map(select(. | test("^articles\/")))' ~/files_added.json ~/files_modified.json
+        jq --slurp '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | length' ~/files_added.json ~/files_modified.json
 
     - name: 💩 Dump steps
       env:
