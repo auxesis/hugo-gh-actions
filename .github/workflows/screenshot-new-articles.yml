@@ -33,8 +33,8 @@ jobs:
     - name: 🕵️ Any articles?
       id: any_articles
       run: |
-        jq --slurp '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | length > 0' ~/files_added.json ~/files_modified.json > ~/any_articles.txt
-        echo "##[set-output name=any_articles;]$(cat ~/any_articles.txt)"
+        echo -n "##[set-output name=any_articles;]"
+        jq --slurp '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | length > 0' ~/files_added.json ~/files_modified.json
 
     - run: echo ${{ steps.any_articles.outputs.any_articles }}
 
