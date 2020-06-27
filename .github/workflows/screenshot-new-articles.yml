@@ -56,14 +56,14 @@ jobs:
         repository: ${{ secrets.WEBSITE_REPO }}
         ref: add-entrypoint-to-dockerfile # FIXME(auxesis) change to master when merged
         token: ${{ secrets.ACCESS_TOKEN }}
-        submodules: true
+        submodules: false
 
     - name: 🔀 Change to PR branch
       run: |
         git config -f .gitmodules submodule.eng-ed.url https://github.com/${{ github.repository }}
         git config -f .gitmodules submodule.eng-ed.branch ${{ github.head_ref }}
         git submodule sync
-        git submodule update --remote --force
+        git submodule update --init --remote --force
 
     - name: 🛠 Build, Tag, Push
       uses: docker/build-push-action@v1
