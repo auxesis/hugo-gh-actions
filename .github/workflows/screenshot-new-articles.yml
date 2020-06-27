@@ -47,6 +47,8 @@ jobs:
         submodules: true
     - run: cd content/engineering-education && git fetch
     - run: cd content/engineering-education && git branch -a
+    - run: cd content/engineering-education && git remote show
+    - run: cd content/engineering-education && git remote show origin
     - name: 🔀 Change to PR branch
       run: cd content/engineering-education && ls && git status && git fetch && git branch -a && git checkout ${{ github.head_ref }}
     - name: 🛠 Build, Tag, Push
