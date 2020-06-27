@@ -9,7 +9,7 @@ on:
 
 jobs:
   preflight:
-    name: 🛫 Do we need a screenshot?
+    name: 🛫 Screenshot needed?
     runs-on: ubuntu-latest
     steps:
     - name: 🛒 Checkout repo
