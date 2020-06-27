@@ -39,8 +39,9 @@ jobs:
     if: needs.preflight.result == 'failure'
     runs-on: ubuntu-latest
     steps:
-    - name: 👍 No screenshot needed
-      run: exit 0
+    - uses: ouzi-dev/commit-status-updater@v1.0.4
+      with:
+        status: "success"
 
   build:
     name: 🌍 Build the website
