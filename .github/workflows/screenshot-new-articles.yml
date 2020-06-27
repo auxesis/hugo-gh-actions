@@ -58,7 +58,7 @@ jobs:
       run: cd content/engineering-education && git remote set-url origin https://github.com/${{ github.repository }}
     - run: cd content/engineering-education && git remote show origin
     - name: 🔀 Fetch PR origin branches
-      run: cd content/engineering-education && git fetch
+      run: cd content/engineering-education && git fetch origin -f
     - run: cd content/engineering-education && git branch -a
     - name: 🔀 Change to PR branch
       run: cd content/engineering-education && git checkout ${{ github.head_ref }}
