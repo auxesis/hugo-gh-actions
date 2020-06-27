@@ -57,15 +57,14 @@ jobs:
         ref: add-entrypoint-to-dockerfile # FIXME(auxesis) change to master when merged
         token: ${{ secrets.ACCESS_TOKEN }}
         submodules: true
-    - name: 🔀 Change PR origin
-      working-directory: content/engineering-education
-      run: git remote set-url origin https://github.com/${{ github.repository }}
-    - run: cd content/engineering-education && git remote show origin
-    - name: 🔀 Fetch PR origin branches
-      run: cd content/engineering-education && git fetch origin -f
-    - run: cd content/engineering-education && git branch -a
+
     - name: 🔀 Change to PR branch
-      run: cd content/engineering-education && git checkout ${{ github.head_ref }}
+      run: |
+        git config -f .gitmodules submodule.eng-ed.url https://github.com/${{ github.repository }}
+        git config -f .gitmodules submodule.eng-ed.branch $${ github.head_ref }}
+        git submodule sync
+        git submodule update --remote --force
+
     - name: 🛠 Build, Tag, Push
       uses: docker/build-push-action@v1
       with:
