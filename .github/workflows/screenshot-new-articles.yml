@@ -19,7 +19,7 @@ jobs:
         GITHUB_CONTEXT: ${{ toJson(github) }}
       run: echo "$GITHUB_CONTEXT"
 
-    - name: � Get PR details
+    - name: 🔎 Get PR details
       uses: actions/github-script@0.6.0
       id: pr
       with:
