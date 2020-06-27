@@ -30,13 +30,15 @@ jobs:
         name: file-changes
         path: ~/*.json
 
-    - name: 🚧 Stop if no article changes
-      run: jq --exit-status --slurp '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | length > 0' ~/files_added.json ~/files_modified.json
+    - name: 🕵️ Any articles?
+      id: any_articles
+      run: |
+        jq --slurp '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | length > 0' ~/files_added.json ~/files_modified.json > ~/any_articles.txt
+        echo "##[set-output name=any_articles;]$(cat ~/any_articles.txt)"
 
-    - uses: ouzi-dev/commit-status-updater@v1.0.4
-      if: failure()
-      with:
-        status: "success"
+    - name: 🚧 Stop if no article changes
+      if: steps.any_articles.outputs.any_articles
+      uses: andymckay/cancel-action@0.2
 
   build:
     name: 🌍 Build the website
