@@ -30,17 +30,17 @@ jobs:
         name: file-changes
         path: ~/*.json
 
-    - name: 🚧 Stop if no article changes
-      run: jq --exit-status --slurp '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | length > 0' ~/files_added.json ~/files_modified.json
+    - name: 🕵️ Any articles?
+      id: any_articles
+      run: |
+        echo -n "##[set-output name=any_articles;]"
+        jq --slurp '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | length > 0' ~/files_added.json ~/files_modified.json
 
-  bail:
-    name: ✅ No screenshot needed
-    needs: [ preflight ]
-    if: failure()
-    runs-on: ubuntu-latest
-    steps:
-    - name: 👍 No screenshot needed
-      run: exit 0
+    - run: echo ${{ steps.any_articles.outputs.any_articles }}
+
+    - name: 🚧 Stop if no article changes
+      if: steps.any_articles.outputs.any_articles == "false"
+      uses: andymckay/cancel-action@0.2
 
   build:
     name: 🌍 Build the website
