@@ -36,7 +36,10 @@ jobs:
         echo -n "##[set-output name=count;]"
         jq --slurp '.[0] + .[1] | unique | map(select(. | test("^articles\/")))' ~/files_added.json ~/files_modified.json
 
-    - run: echo ${{ steps.any_articles.outputs.count }}
+    - name: 💩 Dump steps
+      env:
+        STEPS_CONTEXT: ${{ toJson(steps) }}
+      run: echo "$STEPS_CONTEXT"
 
     - name: 🚧 Stop if no article changes
       if: steps.any_articles.outputs.count == 0
