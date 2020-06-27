@@ -18,26 +18,7 @@ jobs:
         GITHUB_CONTEXT: ${{ toJson(github) }}
       run: echo "$GITHUB_CONTEXT"
 
-    - name: 🔎 Get PR details
-      uses: actions/github-script@0.6.0
-      id: pr
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        result-encoding: string
-        script: |
-          console.log(context.payload)
-
-          const result = await github.repos.listPullRequestsAssociatedWithCommit({
-            owner: context.payload.repository.owner.name,
-            repo: context.payload.repository.name,
-            commit_sha: context.payload.after
-          });
-
-          console.log(result);
-
-          return result.data[0].number;
-
-    - name: Identify file changes
+    - name: 🔎 Identify file changes
       id: file_changes
       uses: trilom/file-changes-action@v1.2.3
       with:
