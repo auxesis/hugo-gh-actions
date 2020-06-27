@@ -8,7 +8,7 @@ on:
 
 jobs:
   preflight:
-    name: 🛫 Screenshot needed?
+    name: 🤔 Screenshot needed?
     runs-on: ubuntu-latest
     steps:
     - name: 🛒 Checkout repo
@@ -30,7 +30,7 @@ jobs:
         name: file-changes
         path: ~/*.json
 
-    - name: 🚧 Stop execution if no article changes
+    - name: 🚧 Stop if no article changes
       run: jq --exit-status --slurp '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | length > 0' ~/files_added.json ~/files_modified.json
 
   build:
