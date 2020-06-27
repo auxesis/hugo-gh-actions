@@ -82,6 +82,7 @@ jobs:
         image: registry.hub.docker.com/auxesis/section-gh-action-www.section.io:latest
         ports:
           - 1313:1313
+    steps:
     - name: 📸 Screenshot Website
       uses: swinton/screenshot-website@v1.0.0
       with:
