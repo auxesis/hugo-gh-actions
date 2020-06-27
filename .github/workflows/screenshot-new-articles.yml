@@ -33,13 +33,8 @@ jobs:
     - name: 🚧 Stop if no article changes
       run: jq --exit-status --slurp '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | length > 0' ~/files_added.json ~/files_modified.json
 
-  bail:
-    name: ✅ No screenshot needed
-    needs: [ preflight ]
-    if: needs.preflight.result == 'failure'
-    runs-on: ubuntu-latest
-    steps:
     - uses: ouzi-dev/commit-status-updater@v1.0.4
+      if: failure()
       with:
         status: "success"
 
