@@ -71,15 +71,18 @@ jobs:
     name: 📸 Screenshot the website
     needs: [ preflight ]
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        article_slug: ${{ needs.preflight.outputs.slugs }}
+#    strategy:
+#      matrix:
+#        article_slug: ${{ needs.preflight.outputs.slugs }}
     services:
       website:
         image: registry.hub.docker.com/auxesis/section-gh-action-www.section.io:latest
         ports:
           - 1313:1313
     steps:
+    - run: |
+        echo ${{ needs.preflight.outputs.slugs }}
+        exit 1
     - name: ⏳ Wait for Hugo to serve
       run: |
         npm install wait-port
