@@ -23,7 +23,7 @@ jobs:
     - name: 🕵️ Any articles?
       id: any_articles
       run: |
-        echo -n "##[set-output name=count;]"
+        echo -n "::set-output name=count::"
         jq --slurp '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | length' ~/files_added.json ~/files_modified.json
 
     - name: 🚧 Stop if no article changes
