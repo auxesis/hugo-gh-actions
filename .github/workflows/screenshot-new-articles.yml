@@ -33,9 +33,8 @@ jobs:
     - name: 🕵️ Identify article names
       id: article_names
       run: |
-        echo -n "::set-output name=slug_matrix::"
         jq --slurp --compact-output '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | map(. | split("/")[1] | { article_slug: . }) | { include: . }' ~/files_added.json ~/files_modified.json |
-        python -c "import json,sys; print(json.dumps(sys.stdin.read().strip())[1:-1])"
+        python -c "import json,sys; print('::set-output name=slug_matrix::' + json.dumps(sys.stdin.read().strip())[1:-1])"
 
   build:
     name: 🌍 Build the website
