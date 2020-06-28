@@ -87,7 +87,7 @@ jobs:
     steps:
     - name: ⏳ Wait for Hugo to serve
       run: |
-        npm install -g wait-port
+        npm install wait-port
         wait-port --timeout 45000 http://localhost:1313/
     - name: 📸 Screenshot Website
       uses: swinton/screenshot-website@v1.0.0
