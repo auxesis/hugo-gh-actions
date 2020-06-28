@@ -11,10 +11,6 @@ jobs:
     steps:
     - name: 🛒 Checkout repo
       uses: actions/checkout@v2
-    - name: Dump github
-      env:
-        GITHUB_CONTEXT: ${{ toJson(github) }}
-      run: echo "$GITHUB_CONTEXT"
 
     - name: 🔎 Identify file changes
       id: file_changes
@@ -22,22 +18,11 @@ jobs:
       with:
         prNumber: ${{ github.event.pull_request.number }}
 
-    - name: ⬆️  Upload file changes
-      uses: actions/upload-artifact@v2
-      with:
-        name: file-changes
-        path: ~/*.json
-
     - name: 🕵️ Any articles?
       id: any_articles
       run: |
         echo -n "##[set-output name=count;]"
         jq --slurp '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | length' ~/files_added.json ~/files_modified.json
-
-    - name: 💩 Dump steps
-      env:
-        STEPS_CONTEXT: ${{ toJson(steps) }}
-      run: echo "$STEPS_CONTEXT"
 
     - name: 🚧 Stop if no article changes
       if: steps.any_articles.outputs.count == 0
