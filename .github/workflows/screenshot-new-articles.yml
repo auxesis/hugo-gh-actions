@@ -33,6 +33,7 @@ jobs:
     - name: 🕵️ Identify article names
       id: article_names
       run: |
+        echo -n "::set-output name=slug_matrix::"
         jq --slurp --compact-output '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | map(. | split("/")[1] | { article_slug: . }) | { include: . }' ~/files_added.json ~/files_modified.json
         echo "::set-output name=slug_matrix::{\"include\":[{\"article_slug\":\"abstraction-concepts-part1\"},{\"article_slug\":\"abstraction-concepts-part2\"}]}"
 
