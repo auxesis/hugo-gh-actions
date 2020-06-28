@@ -8,6 +8,8 @@ jobs:
   preflight:
     name: 🤔 Screenshot needed?
     runs-on: ubuntu-latest
+    outputs:
+      slugs: ${{ job.article_names.outputs.slugs }}
     steps:
     - name: 🛒 Checkout repo
       uses: actions/checkout@v2
@@ -27,6 +29,12 @@ jobs:
     - name: 🚧 Stop if no article changes
       if: steps.any_articles.outputs.count == 0
       uses: andymckay/cancel-action@0.2
+
+    - name: 🕵️ Identify article names
+      id: article_names
+      run: |
+        echo -n "##[set-output name=slugs;]"
+        jq --slurp --compact-output '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | map(. | split("/")[1])' ~/files_added.json ~/files_modified.json
 
   build:
     name: 🌍 Build the website
