@@ -69,9 +69,9 @@ jobs:
     name: 📸 Screenshot the website
     needs: [ preflight ]
     runs-on: ubuntu-latest
-#    strategy:
-#      matrix:
-#        article_slug: ${{ needs.preflight.outputs.slugs }}
+    strategy:
+      matrix:
+        article_slug: ${{ fromJSON(needs.preflight.outputs.slugs) }}
     services:
       website:
         image: registry.hub.docker.com/auxesis/section-gh-action-www.section.io:latest
