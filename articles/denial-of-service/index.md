@@ -14,6 +14,8 @@ images:
   - url: /engineering-education/denial-of-service/hero.jpg
     alt: stop sign example denial of service
 ---
+Another edit.
+
 A Denial of Service (DoS) attack is a type of cyber attack which achieves their goal by flooding a stream of packets to the victim that swamps his/her network or processing capacity, denying access to the legitimate user. Ultimately, it can cost both time and money because its resources and services are inaccessible.
 
 <!--more-->
