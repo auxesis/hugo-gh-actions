@@ -9,7 +9,7 @@ jobs:
     name: 🤔 Screenshot needed?
     runs-on: ubuntu-latest
     outputs:
-      slugs: ${{ job.article_names.outputs.slugs }}
+      slugs: ${{ step.article_names.outputs.slugs }}
     steps:
     - name: 🛒 Checkout repo
       uses: actions/checkout@v2
