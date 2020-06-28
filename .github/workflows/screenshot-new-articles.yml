@@ -34,7 +34,8 @@ jobs:
       id: article_names
       run: |
         echo -n "##[set-output name=slugs;]"
-        jq --slurp --compact-output '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | map(. | split("/")[1] | { article_slug: . }) | { includes: . }' ~/files_added.json ~/files_modified.json | python -c 'import json,sys; print(json.dumps(sys.stdin.read().strip()))'
+        jq --slurp --compact-output '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | map(. | split("/")[1] | { article_slug: . }) | { includes: . }' ~/files_added.json ~/files_modified.json |
+        python -c 'import json,sys; print(json.dumps(sys.stdin.read().strip()))'
 
   build:
     name: 🌍 Build the website
