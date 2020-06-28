@@ -35,6 +35,8 @@ jobs:
       run: |
         echo -n "##[set-output name=slugs;]"
         jq --slurp --compact-output '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | map(. | split("/")[1])' ~/files_added.json ~/files_modified.json
+    - run: |
+        echo ${{ steps.article_names.outputs.slugs }}
 
   build:
     name: 🌍 Build the website
