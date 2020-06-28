@@ -69,6 +69,9 @@ jobs:
     name: 📸 Screenshot the website
     needs: [ preflight ]
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        article_slug: ${{ needs.preflight.outputs.slugs }}
     services:
       website:
         image: registry.hub.docker.com/auxesis/section-gh-action-www.section.io:latest
@@ -83,6 +86,6 @@ jobs:
       uses: swinton/screenshot-website@v1.0.0
       timeout-minutes: 2
       with:
-        source: http://localhost:1313/
-        destination: screenshot.png
+        source: http://localhost:1313/${{ matrix.article_slug }}
+        destination: screenshot-${{ matrix.article_slug }}.png
         full-page: true
