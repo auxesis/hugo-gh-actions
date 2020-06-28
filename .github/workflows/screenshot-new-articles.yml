@@ -9,7 +9,7 @@ jobs:
     name: 🤔 Screenshot needed?
     runs-on: ubuntu-latest
     outputs:
-      slugs: ${{ steps.article_names.outputs.slugs }}
+      slug_matrix: ${{ steps.article_names.outputs.slug_matrix }}
     steps:
     - name: 🛒 Checkout repo
       uses: actions/checkout@v2
@@ -34,7 +34,7 @@ jobs:
       id: article_names
       run: |
         echo -n "##[set-output name=slugs;]"
-        jq --slurp --compact-output '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | map(. | split("/")[1])' ~/files_added.json ~/files_modified.json | python -c 'import json,sys; print(json.dumps(sys.stdin.read().strip()))'
+        jq --slurp --compact-output '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | map(. | split("/")[1] | { article_slug: . }) | { includes: . }' ~/files_added.json ~/files_modified.json | python -c 'import json,sys; print(json.dumps(sys.stdin.read().strip()))'
 
   build:
     name: 🌍 Build the website
@@ -70,8 +70,7 @@ jobs:
     needs: [ preflight ]
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        article_slug: ${{ fromJSON(needs.preflight.outputs.slugs) }}
+      matrix: ${{ fromJSON(needs.preflight.outputs.slug_matrix) }}
     services:
       website:
         image: registry.hub.docker.com/auxesis/section-gh-action-www.section.io:latest
