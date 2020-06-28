@@ -79,7 +79,7 @@ jobs:
           - 1313:1313
     steps:
     - name: Dump matrix
-      run: echo ${{ fromJSON(matrix) }}
+      run: echo ${{ matrix }}
     - name: ⏳ Wait for Hugo to serve
       run: |
         npm install wait-port
