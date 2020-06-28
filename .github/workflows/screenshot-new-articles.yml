@@ -67,7 +67,7 @@ jobs:
         tags: latest
 
   screenshot:
-    name: 📸 Screenshot the website
+    name: 📸 Take screenshot
     needs: [ preflight ]
     runs-on: ubuntu-latest
     strategy:
