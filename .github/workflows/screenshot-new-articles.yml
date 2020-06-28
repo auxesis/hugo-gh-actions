@@ -78,6 +78,8 @@ jobs:
         ports:
           - 1313:1313
     steps:
+    - name: Dump matrix
+      run: echo ${{ fromJSON(matrix) }}
     - name: ⏳ Wait for Hugo to serve
       run: |
         npm install wait-port
@@ -86,6 +88,6 @@ jobs:
       uses: swinton/screenshot-website@v1.0.0
       timeout-minutes: 2
       with:
-        source: http://localhost:1313/${{ matrix.article_slug }}
+        source: http://localhost:1313/engineering-education/${{ matrix.article_slug }}/
         destination: screenshot-${{ matrix.article_slug }}.png
         full-page: true
