@@ -99,7 +99,7 @@ jobs:
       matrix: ${{ fromJSON(needs.preflight.outputs.slug_matrix) }}
     services:
       website:
-        image: ${{ matrix.docker_registry }}/${{ matrix.docker_image }}:latest
+        image: registry.hub.docker.com/auxesis/section-gh-action-www.section.io:latest
         ports:
           - 1313:1313
     steps:
