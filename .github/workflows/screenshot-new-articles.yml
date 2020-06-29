@@ -93,13 +93,9 @@ jobs:
       env:
         IMG_FILENAME: screenshot-${{ matrix.article_slug }}.png
         UPLOAD_RESPONSE_FILENAME: kraken-screenshot-${{ matrix.article_slug }}-response.json
-      run: >
-        curl https://api.kraken.io/v1/upload
-        -X POST
-        --output $UPLOAD_RESPONSE_FILENAME
-        --form data='{"auth":{"api_key": "${{ secrets.KRAKEN_API_KEY }}", "api_secret": "${{ secrets.KRAKEN_API_SECRET }}"}, "wait":true, "lossy":true}'
-        --form upload=$IMG_FILENAME
+      run: |
+        curl https://api.kraken.io/v1/upload -X POST --output $UPLOAD_RESPONSE_FILENAME --form data='{"auth":{"api_key": "${{ secrets.KRAKEN_API_KEY }}", "api_secret": "${{ secrets.KRAKEN_API_SECRET }}"}, "wait":true, "lossy":true}' --form upload=$IMG_FILENAME
+        cat $UPLOAD_RESPONSE_FILENAME
      - name: 🗣 Post comment
        run: |
-         cat $UPLOAD_RESPONSE_FILENAME
          echo $${ steps.upload-screenshot.outputs.img_url }}
