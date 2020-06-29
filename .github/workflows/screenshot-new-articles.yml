@@ -76,14 +76,13 @@ jobs:
         image: registry.hub.docker.com/auxesis/section-gh-action-www.section.io:latest
         ports:
           - 1313:1313
-    env:
-      IMG_FILENAME: screenshot-${{ matrix.article_slug }}.png
-      UPLOAD_RESPONSE_FILENAME: kraken-screenshot-${{ matrix.article_slug }}-response.json
     steps:
+
     - name: ⏳ Wait for Hugo to serve
       run: |
         npm install wait-port
         $(npm bin)/wait-port --timeout 45000 http://localhost:1313/
+
     - name: 📸 Screenshot Website
       id: screenshot_website
       uses: swinton/screenshot-website@v1.0.0
@@ -92,24 +91,19 @@ jobs:
         source: http://localhost:1313/engineering-education/${{ matrix.article_slug }}/
         destination: screenshot-${{ matrix.article_slug }}.png # FIXME(auxesis) lookup variable name
         full-page: true
-    - run: echo $IMG_FILENAME
-    - run: echo "${{ toJSON(steps.screenshot_website.outputs) }}"
-    - run: file $IMG_FILENAME
-    - run: echo $UPLOAD_RESPONSE_FILENAME
-    - run: file $UPLOAD_RESPONSE_FILENAME
+
     - name: ☁️  Upload screenshot
       id: upload-screenshot
+      env:
+        UPLOAD_RESPONSE_FILENAME: kraken-upload-screenshot-${{ matrix.article_slug }}-response.json
       run: |
         curl https://api.kraken.io/v1/upload \
         -X POST \
         --output $UPLOAD_RESPONSE_FILENAME \
         --form data='{"auth":{"api_key": "${{ secrets.KRAKEN_API_KEY }}", "api_secret": "${{ secrets.KRAKEN_API_SECRET }}"}, "wait":true, "lossy":true}' \
-        --form upload=$IMG_FILENAME
-        echo $UPLOAD_RESPONSE_FILENAME
-        cat $UPLOAD_RESPONSE_FILENAME
+        --form upload=@${{ steps.screenshot_website.outputs.path }}
         echo -n "::set-output name=img_url::"
         jq --raw-output '.kraked_url' $UPLOAD_RESPONSE_FILENAME
     - name: 🗣 Post comment
       run: |
-        cat $UPLOAD_RESPONSE_FILENAME
         echo ${{ steps.upload-screenshot.outputs.img_url }}
