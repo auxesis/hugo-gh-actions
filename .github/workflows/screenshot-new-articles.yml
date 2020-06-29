@@ -88,7 +88,7 @@ jobs:
 
   screenshot:
     name: 📸 Take screenshot
-    needs: [ build ]
+    needs: [ preflight, build ]
     runs-on: ubuntu-latest
     strategy:
       matrix: ${{ fromJSON(needs.preflight.outputs.slug_matrix) }}
