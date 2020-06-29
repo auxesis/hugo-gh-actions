@@ -52,13 +52,11 @@ jobs:
       if: steps.any_articles.outputs.count == 0
       uses: andymckay/cancel-action@0.2
 
-    - run: cat ~/files_added.json ~/files_modified.json
-
     - name: 🕵️ Identify article names
       id: article_names
       run: |
         echo -n "::set-output name=slug_matrix::"
-        jq --slurp --compact-output '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | map(. | split("/")[1] | unique | { article_slug: . }) | { include: . }' ~/files_added.json ~/files_modified.json
+        jq --slurp --compact-output '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | map(. | split("/")[1] | { article_slug: . }) | unique | { include: . }' ~/files_added.json ~/files_modified.json
 
   build:
     name: 🌍 Build the website
