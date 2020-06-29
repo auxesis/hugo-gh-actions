@@ -17,6 +17,8 @@ images:
 
 Here's a small edit. 
 
+And another edit.
+
 A **binary search** is an algorithm that finds the position of a target value in a *sorted* list. It has [several uses in practice](https://stackoverflow.com/questions/540165/where-is-binary-search-used-in-practice):
 - Finding entries in sorted arrays, including sorted collections from language libraries like Java, .NET, C++ STL;
 - Hunting for errors during the debugging process, which is faster than single-stepping large parts of the code (even Git has a [git-bisect command](https://git-scm.com/book/en/v2/Git-Tools-Debugging-with-Git#Binary-Search));
