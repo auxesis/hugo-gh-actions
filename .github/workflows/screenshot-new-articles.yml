@@ -94,7 +94,7 @@ jobs:
       matrix: ${{ fromJSON(needs.preflight.outputs.slug_matrix) }}
     services:
       website:
-        image: '${{ secrets.DOCKER_REGISTRY }}/${{ secrets.DOCKER_IMAGE }}:latest'
+        image: ${{ secrets['DOCKER_REGISTRY'] }}/${{ secrets['DOCKER_IMAGE'] }}:latest'
         ports:
           - 1313:1313
     steps:
