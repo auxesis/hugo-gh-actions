@@ -76,7 +76,6 @@ jobs:
         ports:
           - 1313:1313
     steps:
-
     - name: ⏳ Wait for Hugo to serve
       run: |
         npm install wait-port
@@ -107,6 +106,7 @@ jobs:
         fi
         echo -n "::set-output name=img_url::"
         jq --raw-output '.kraked_url' $UPLOAD_RESPONSE_FILENAME
+
     - name: 🗣 Post comment
       uses: actions/github-script@v2
       with:
