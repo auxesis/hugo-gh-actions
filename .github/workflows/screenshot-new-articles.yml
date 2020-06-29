@@ -102,8 +102,10 @@ jobs:
         --output $UPLOAD_RESPONSE_FILENAME \
         --form data='{"auth":{"api_key": "${{ secrets.KRAKEN_API_KEY }}", "api_secret": "${{ secrets.KRAKEN_API_SECRET }}"}, "wait":true, "lossy":true}' \
         --form upload=@${{ steps.screenshot_website.outputs.path }}
-        cat $UPLOAD_RESPONSE_FILENAME
-        grep -c '^<html>' $UPLOAD_RESPONSE_FILENAME
+        if [ ! grep -c '^{' $UPLOAD_RESPONSE_FILENAME ]; then
+          cat $UPLOAD_RESPONSE_FILENAME
+          exit 1
+        fi
         echo -n "::set-output name=img_url::"
         jq --raw-output '.kraked_url' $UPLOAD_RESPONSE_FILENAME
     - name: 🗣 Post comment
