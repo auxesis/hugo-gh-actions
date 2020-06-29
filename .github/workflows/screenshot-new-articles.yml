@@ -76,6 +76,9 @@ jobs:
         image: registry.hub.docker.com/auxesis/section-gh-action-www.section.io:latest
         ports:
           - 1313:1313
+    env:
+      IMG_FILENAME: screenshot-${{ matrix.article_slug }}.png
+      UPLOAD_RESPONSE_FILENAME: kraken-screenshot-${{ matrix.article_slug }}-response.json
     steps:
     - name: ⏳ Wait for Hugo to serve
       run: |
@@ -90,9 +93,6 @@ jobs:
         full-page: true
     - name: ☁️  Upload screenshot
       id: upload-screenshot
-      env:
-        IMG_FILENAME: screenshot-${{ matrix.article_slug }}.png
-        UPLOAD_RESPONSE_FILENAME: kraken-screenshot-${{ matrix.article_slug }}-response.json
       run: |
         curl https://api.kraken.io/v1/upload \
         -X POST \
