@@ -112,12 +112,10 @@ jobs:
       uses: actions/github-script@v2
       with:
         script: |
-          console.log('context', context)
           args = {
             issue_number: context.payload.pull_request.number,
             owner: context.repo.owner,
             repo: context.repo.repo,
             body: "Here's a screenshot of the article:\n\n![screenshot](${{ steps.upload-screenshot.outputs.img_url }})"
           }
-          console.log(args)
           github.issues.createComment(args)
