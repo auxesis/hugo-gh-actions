@@ -94,6 +94,6 @@ jobs:
       env:
         IMG_FILENAME: "screenshot-${{ matrix.article_slug }}.png"
         UPLOAD_RESPONSE_FILENAME: "kraken-screenshot-${{ matrix.article_slug }}-response.json"
-     - name: 🗣 Post comment
-       run: |
-         echo $${ steps.upload-screenshot.outputs.img_url }}
+    - name: 🗣 Post comment
+      run: |
+        echo $${ steps.upload-screenshot.outputs.img_url }}
