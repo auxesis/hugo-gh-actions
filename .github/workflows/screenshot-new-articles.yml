@@ -83,7 +83,7 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         # TODO(auxesis): When GitHub Actions starts supporting authenticated GitHub Package Registry https://github.community/t/16358
-        repository: section-gh-action-www.section.io
+        repository: auxesis/section-gh-action-www.section.io
         tags: latest
 
   screenshot:
