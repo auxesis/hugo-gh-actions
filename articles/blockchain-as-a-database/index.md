@@ -15,6 +15,8 @@ images:
     alt: blockchain example image
 ---
 
+![bacon](https://cdn.iwastesomuchtime.com/September-11-2011-16-18-07-3828.jpeg)
+
 When people talk about blockchain, many times, they are referring to the use of blockchain for trading cryptocurrencies. But blockchain has another big, and perhaps as powerful an application - blockchain as a database. Before we delve into this world of possibilities, let’s first look at what blockchain is.
 <!--more-->
 ### What is a Blockchain?
