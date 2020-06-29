@@ -56,7 +56,7 @@ jobs:
       id: article_names
       run: |
         echo -n "::set-output name=slug_matrix::"
-        jq --slurp --compact-output '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | map(. | split("/")[1] | { article_slug: . }) | { include: . }' ~/files_added.json ~/files_modified.json
+        jq --slurp --compact-output '.[0] + .[1] | unique | map(select(. | test("^articles\/"))) | map(. | split("/")[1] | { article_slug: ., docker_image: "${{ secrets.DOCKER_IMAGE }}", docker_registry: "${{ secrets.DOCKER_REGISTRY }}" }) | { include: . }' ~/files_added.json ~/files_modified.json
 
   build:
     name: 🌍 Build the website
@@ -94,7 +94,7 @@ jobs:
       matrix: ${{ fromJSON(needs.preflight.outputs.slug_matrix) }}
     services:
       website:
-        image: ${{ secrets['DOCKER_REGISTRY'] }}/${{ secrets['DOCKER_IMAGE'] }}:latest'
+        image: ${{ matrix.docker_registry }}/${{ matrix.docker_image }}:latest
         ports:
           - 1313:1313
     steps:
