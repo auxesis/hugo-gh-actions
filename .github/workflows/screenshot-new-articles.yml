@@ -85,6 +85,7 @@ jobs:
         npm install wait-port
         $(npm bin)/wait-port --timeout 45000 http://localhost:1313/
     - name: 📸 Screenshot Website
+      id: screenshot_website
       uses: swinton/screenshot-website@v1.0.0
       timeout-minutes: 2
       with:
@@ -92,6 +93,7 @@ jobs:
         destination: screenshot-${{ matrix.article_slug }}.png # FIXME(auxesis) lookup variable name
         full-page: true
     - run: echo $IMG_FILENAME
+    - run: echo "${{ toJSON(screenshot_website.outputs }}"
     - run: file $IMG_FILENAME
     - run: echo $UPLOAD_RESPONSE_FILENAME
     - run: file $UPLOAD_RESPONSE_FILENAME
