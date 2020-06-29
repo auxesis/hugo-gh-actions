@@ -90,10 +90,10 @@ jobs:
         full-page: true
     - name: Upload screenshot
       id: upload-screenshot
+      run: cat $UPLOAD_RESPONSE_FILENAME
       env:
         IMG_FILENAME: "screenshot-${{ matrix.article_slug }}.png"
         UPLOAD_RESPONSE_FILENAME: "kraken-screenshot-${{ matrix.article_slug }}-response.json"
-      run: cat $UPLOAD_RESPONSE_FILENAME
      - name: 🗣 Post comment
        run: |
          echo $${ steps.upload-screenshot.outputs.img_url }}
