@@ -99,8 +99,9 @@ jobs:
           --output $UPLOAD_RESPONSE_FILENAME \
           --form data='{"auth":{"api_key": "${{ secrets.KRAKEN_API_KEY }}", "api_secret": "${{ secrets.KRAKEN_API_SECRET }}"}, "wait":true, "lossy":true}' \
           --form upload=$IMG_FILENAME
-        echo -n "::set-output name=img_url::"
-        jq --raw-output '.kraked_url' $UPLOAD_RESPONSE_FILENAME
+        cat $UPLOAD_RESPONSE_FILENAME
+        #echo -n "::set-output name=img_url::"
+        #jq --raw-output '.kraked_url' $UPLOAD_RESPONSE_FILENAME
      - name: 🗣 Post comment
        run: |
          echo $${ steps.upload-screenshot.outputs.img_url }}
