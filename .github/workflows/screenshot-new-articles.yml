@@ -62,7 +62,6 @@ jobs:
     name: 🌍 Build the website
     runs-on: ubuntu-latest
     needs: [ preflight ]
-    if: false
     steps:
     - name: 🛒 Checkout repo
       uses: actions/checkout@v2
@@ -89,7 +88,7 @@ jobs:
 
   screenshot:
     name: 📸 Take screenshot
-    needs: [ preflight ]
+    needs: [ build ]
     runs-on: ubuntu-latest
     strategy:
       matrix: ${{ fromJSON(needs.preflight.outputs.slug_matrix) }}
