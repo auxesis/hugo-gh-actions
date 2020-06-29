@@ -39,6 +39,7 @@ jobs:
   build:
     name: 🌍 Build the website
     runs-on: ubuntu-latest
+    if: false
     needs: [ preflight ]
     steps:
     - name: 🛒 Checkout repo
@@ -66,7 +67,7 @@ jobs:
 
   screenshot:
     name: 📸 Take screenshot
-    needs: [ preflight, build ]
+    needs: [ preflight ]
     runs-on: ubuntu-latest
     strategy:
       matrix: ${{ fromJSON(needs.preflight.outputs.slug_matrix) }}
