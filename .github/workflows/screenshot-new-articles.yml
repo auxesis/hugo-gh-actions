@@ -104,4 +104,4 @@ jobs:
     - name: 🗣 Post comment
       run: |
         cat $UPLOAD_RESPONSE_FILENAME
-        echo $${ steps.upload-screenshot.outputs.img_url }}
+        echo ${{ steps.upload-screenshot.outputs.img_url }}
