@@ -89,8 +89,12 @@ jobs:
       timeout-minutes: 2
       with:
         source: http://localhost:1313/engineering-education/${{ matrix.article_slug }}/
-        destination: screenshot-${{ matrix.article_slug }}.png
+        destination: screenshot-${{ matrix.article_slug }}.png # FIXME(auxesis) lookup variable name
         full-page: true
+    - run: echo $IMG_FILENAME
+    - run: file $IMG_FILENAME
+    - run: echo $UPLOAD_RESPONSE_FILENAME
+    - run: file $UPLOAD_RESPONSE_FILENAME
     - name: ☁️  Upload screenshot
       id: upload-screenshot
       run: |
