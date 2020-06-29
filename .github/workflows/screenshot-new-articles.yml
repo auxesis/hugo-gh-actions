@@ -60,6 +60,7 @@ jobs:
 
     - run: |
         echo "${{ toJSON(step.article_names.outputs.slug_matrix) }}"
+        exit 1
 
 
   build:
