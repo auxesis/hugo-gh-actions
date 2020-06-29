@@ -87,3 +87,19 @@ jobs:
         source: http://localhost:1313/engineering-education/${{ matrix.article_slug }}/
         destination: screenshot-${{ matrix.article_slug }}.png
         full-page: true
+    - name: ☁️  Upload screenshot
+      id: upload-screenshot
+      env:
+        IMG_FILENAME: screenshot-${{ matrix.article_slug }}.png
+        UPLOAD_RESPONSE_FILENAME: kraken-screenshot-${{ matrix.article_slug }}-response.json
+      run: |
+        curl https://api.kraken.io/v1/upload \
+        -X POST \
+        --output $UPLOAD_RESPONSE_FILENAME \
+        --form data='{"auth":{"api_key": "${{ secrets.KRAKEN_API_KEY }}", "api_secret": "${{ secrets.KRAKEN_API_SECRET }}"}, "wait":true, "lossy":true}' \
+        --form upload=$IMG_FILENAME
+        echo -n "::set-output name=img_url::"
+        jq --raw-output '.kraked_url' $UPLOAD_RESPONSE_FILENAME
+     - name: 🗣 Post comment
+       run: |
+         echo $${ steps.upload-screenshot.outputs.img_url }}
