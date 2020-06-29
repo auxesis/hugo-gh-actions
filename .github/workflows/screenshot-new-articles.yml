@@ -46,7 +46,7 @@ jobs:
       with:
         repository: ${{ secrets.WEBSITE_REPO }}
         ref: add-entrypoint-to-dockerfile # FIXME(auxesis) change to master when merged
-        token: ${{ secrets.ACCESS_TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}
         submodules: false
 
     - name: 🔀 Change to PR branch
