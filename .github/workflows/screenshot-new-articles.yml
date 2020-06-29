@@ -106,5 +106,14 @@ jobs:
         echo -n "::set-output name=img_url::"
         jq --raw-output '.kraked_url' $UPLOAD_RESPONSE_FILENAME
     - name: 🗣 Post comment
-      run: |
-        echo ${{ steps.upload-screenshot.outputs.img_url }}
+      uses: actions/github-script@v2
+      with:
+        script: |
+          args = {
+            issue_number: context.event.pull_request.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: "Here's a screenshot of the article:\n\n![screenshot](${{ steps.upload-screenshot.outputs.img_url }})"
+          }
+          console.log(args)
+          github.issues.createComment(args)
