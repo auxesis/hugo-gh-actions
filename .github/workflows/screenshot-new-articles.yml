@@ -93,7 +93,7 @@ jobs:
         destination: screenshot-${{ matrix.article_slug }}.png # FIXME(auxesis) lookup variable name
         full-page: true
     - run: echo $IMG_FILENAME
-    - run: echo "${{ toJSON(screenshot_website.outputs }}"
+    - run: echo "${{ toJSON(screenshot_website.outputs) }}"
     - run: file $IMG_FILENAME
     - run: echo $UPLOAD_RESPONSE_FILENAME
     - run: file $UPLOAD_RESPONSE_FILENAME
