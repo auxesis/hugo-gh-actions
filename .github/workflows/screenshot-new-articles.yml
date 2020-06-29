@@ -91,8 +91,8 @@ jobs:
     - name: ☁️  Upload screenshot
       id: upload-screenshot
       env:
-        IMG_FILENAME: screenshot-${{ matrix.article_slug }}.png
-        UPLOAD_RESPONSE_FILENAME: kraken-screenshot-${{ matrix.article_slug }}-response.json
+        IMG_FILENAME: "screenshot-${{ matrix.article_slug }}.png"
+        UPLOAD_RESPONSE_FILENAME: "kraken-screenshot-${{ matrix.article_slug }}-response.json"
       run: |
         cat $UPLOAD_RESPONSE_FILENAME
      - name: 🗣 Post comment
