@@ -102,7 +102,7 @@ jobs:
         --output $UPLOAD_RESPONSE_FILENAME \
         --form data='{"auth":{"api_key": "${{ secrets.KRAKEN_API_KEY }}", "api_secret": "${{ secrets.KRAKEN_API_SECRET }}"}, "wait":true, "lossy":true}' \
         --form upload=@${{ steps.screenshot_website.outputs.path }}
-        if [ ! grep -c '^{' $UPLOAD_RESPONSE_FILENAME ]; then
+        if ! grep -c '^{' $UPLOAD_RESPONSE_FILENAME; then
           cat $UPLOAD_RESPONSE_FILENAME
           exit 1
         fi
