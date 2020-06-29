@@ -1,3 +1,25 @@
+# # Screenshot PR changes
+#
+# This job:
+#
+# - Detects if there are any articles that should be screenshotted
+# - Builds a version of the website with the new articles
+# - Takes a screenshot of any article changes
+# - Posts them as comments on open PRs
+#
+# This job requires multiple secrets to successfully run:
+#
+# | Secret name       | Description                                                                       | Example                                                 |
+# |-------------------|-----------------------------------------------------------------------------------|---------------------------------------------------------|
+# | ACCESS_TOKEN      | Personal access token with permissions: repo, read:packages, write:packages, +SSO | 1b6c637ac9b58abe8be795077bc13145                        |
+# | WEBSITE_REPO      | Git repository for the full Section website, to build the articles inside         | https://github.com/section/example-website-repo         |
+# | DOCKER_REGISTRY   | Docker registry the image should be pushed/pulled                                 | registry.hub.docker.com                                 |
+# | DOCKER_IMAGE      | Name of the Docker image to be built and used                                     | section-io/section-www.section.io-engineering-education |
+# | DOCKER_USERNAME   | Username for the Docker registry                                                  | section                                                 |
+# | DOCKER_PASSWORD   | Password for the Docker registry                                                  | s3cr3t                                                  |
+# | KRAKEN_API_KEY    | API key for Kraken                                                                | 5ce999eabbd6ad238475bcab6a44f4ad                        |
+# | KRAKEN_API_SECRET | Secret for Kraken API key                                                         | 183c026816dfa5428d029b63e3aac647                        |
+
 name: Screenshot PR changes
 
 on:
